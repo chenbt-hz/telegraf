@@ -56,12 +56,14 @@ func TestChildPattern(t *testing.T) {
 
 		fmt.Println("cmd infos get by ps -ef ...")
 		if len(childpids) > 0 {
-			cmd2 := exec.Command("/bin/bash", "-c", "ps -ef |grep sleep")
+			cmd2 := exec.Command("ps -ef |grep sleep")
 			if err := cmd2.Start(); err != nil {
 				fmt.Printf("Error starting command: %s\n", err)
 				return
 			}
 			fmt.Println(cmd2.Stdout)
+			fmt.Println(cmd2.Stderr)
+			fmt.Println(cmd2.Err)
 		}
 
 		fmt.Println("require.Contains ...")
