@@ -33,7 +33,7 @@ func BenchmarkFullPattern(b *testing.B) {
 
 func TestChildPattern(t *testing.T) {
 	if runtime.GOOS == "linux" || runtime.GOOS == "darwin" {
-		cmd := exec.Command("/bin/bash", "-c", "sleep 10 && echo \"TestChildPattern\" ")
+		cmd := exec.Command("/bin/bash", "-c", "sleep 30")
 		if err := cmd.Start(); err != nil {
 			fmt.Printf("Error starting command: %s\n", err)
 			return
@@ -42,7 +42,7 @@ func TestChildPattern(t *testing.T) {
 		f, err := NewNativeFinder()
 		require.NoError(t, err)
 
-		childpids, err := f.ChildPattern("TestChildPattern")
+		childpids, err := f.ChildPattern("sleep 30")
 		for _, p := range childpids {
 			t.Log(string(p))
 		}
@@ -54,7 +54,7 @@ func TestChildPattern(t *testing.T) {
 		}
 
 		var nilpids []PID
-		childpids, err = f.ChildPattern("TestChildPattern")
+		childpids, err = f.ChildPattern("sleep 30")
 		for _, p := range childpids {
 			t.Log(string(p))
 		}
