@@ -45,8 +45,8 @@ func TestChildPattern(t *testing.T) {
 		childpids, err := f.ChildPattern("gotestsum")
 		fmt.Println("pid in childpids which pattern gotestsum...")
 		for _, p := range childpids {
-			t.Log(string(p))
-			fmt.Println(string(p))
+			//t.Log(string(p))
+			fmt.Println(p)
 		}
 		fmt.Println("cmd infos ...")
 		fmt.Println(cmd.Path)
@@ -57,6 +57,10 @@ func TestChildPattern(t *testing.T) {
 		fmt.Println("cmd infos get by ps -ef ...")
 		if len(childpids) > 0 {
 			cmd2 := exec.Command("/bin/bash", "-c", "ps -ef |grep sleep")
+			if err := cmd2.Start(); err != nil {
+				fmt.Printf("Error starting command: %s\n", err)
+				return
+			}
 			fmt.Println(cmd2.Stdout)
 		}
 
