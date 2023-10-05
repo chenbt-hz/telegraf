@@ -42,20 +42,25 @@ func TestChildPattern(t *testing.T) {
 		f, err := NewNativeFinder()
 		require.NoError(t, err)
 
-		childpids, err := f.ChildPattern("gotestsum")
+		childpids, err := f.ChildPattern("sleep")
+		fmt.Println("pid in childpids which pattern sleep...")
 		for _, p := range childpids {
 			t.Log(string(p))
 			fmt.Println(string(p))
 		}
+		fmt.Println("cmd infos ...")
 		fmt.Println(cmd.Path)
 		for _, arg := range cmd.Args {
 			fmt.Println(arg)
 		}
+
+		fmt.Println("cmd infos get by ps -ef ...")
 		if len(childpids) > 0 {
-			cmd2 := exec.Command("/bin/bash", "-c", "ps -ef |grep ", string(childpids[0]))
+			cmd2 := exec.Command("/bin/bash", "-c", "ps -ef |grep sleep")
 			fmt.Println(cmd2.Stdout)
 		}
 
+		fmt.Println("require.Contains ...")
 		require.Contains(t, childpids, PID(cmd.Process.Pid))
 		//require.Equal(t, []PID{PID(cmd.Process.Pid)}, childpids)
 		cmd.Process.Kill()
