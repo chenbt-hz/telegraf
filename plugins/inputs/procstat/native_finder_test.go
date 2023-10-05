@@ -33,7 +33,7 @@ func BenchmarkFullPattern(b *testing.B) {
 
 func TestChildPattern(t *testing.T) {
 	if runtime.GOOS == "linux" || runtime.GOOS == "darwin" {
-		cmd := exec.Command("/bin/bash", "-c", "echo \"TestChildPattern\" && sleep 1000")
+		cmd := exec.Command("/bin/bash", "-c", "sleep 10 && echo \"TestChildPattern\" ")
 		if err := cmd.Start(); err != nil {
 			fmt.Printf("Error starting command: %s\n", err)
 			return
