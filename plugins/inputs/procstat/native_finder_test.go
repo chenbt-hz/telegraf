@@ -45,6 +45,15 @@ func TestChildPattern(t *testing.T) {
 		childpids, err := f.ChildPattern("gotestsum")
 		for _, p := range childpids {
 			t.Log(string(p))
+			fmt.Println(string(p))
+		}
+		fmt.Println(cmd.Path)
+		for _, arg := range cmd.Args {
+			fmt.Println(arg)
+		}
+		if len(childpids) > 0 {
+			cmd2 := exec.Command("/bin/bash", "-c", "ps -ef |grep ", string(childpids[0]))
+			fmt.Println(cmd2.Stdout)
 		}
 
 		require.Contains(t, childpids, PID(cmd.Process.Pid))
