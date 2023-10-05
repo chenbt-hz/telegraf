@@ -42,12 +42,13 @@ func TestChildPattern(t *testing.T) {
 		f, err := NewNativeFinder()
 		require.NoError(t, err)
 
-		childpids, err := f.ChildPattern("sleep 30")
+		childpids, err := f.ChildPattern("gotestsum")
 		for _, p := range childpids {
 			t.Log(string(p))
 		}
 
 		require.Contains(t, childpids, PID(cmd.Process.Pid))
+		//require.Equal(t, []PID{PID(cmd.Process.Pid)}, childpids)
 		cmd.Process.Kill()
 		if err != nil {
 			panic(err)
