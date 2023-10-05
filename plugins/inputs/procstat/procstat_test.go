@@ -451,7 +451,7 @@ func TestGather_SameTimestamps(t *testing.T) {
 func TestGather_supervisorUnitPIDs(t *testing.T) {
 	p := Procstat{
 		createPIDFinder: pidFinder([]PID{}),
-		SupervisorUnit:  []string{"TestGather_supervisorUnitPIDs"},
+		SupervisorUnits: []string{"TestGather_supervisorUnitPIDs"},
 	}
 	pidsTags := p.findPids()
 	for _, pidsTag := range pidsTags {
@@ -468,7 +468,7 @@ func TestGather_MoresupervisorUnitPIDs(t *testing.T) {
 	p := Procstat{
 		createPIDFinder: pidFinder([]PID{}),
 		Pattern:         "7311",
-		SupervisorUnit:  []string{"TestGather_STARTINGsupervisorUnitPIDs", "TestGather_FATALsupervisorUnitPIDs"},
+		SupervisorUnits: []string{"TestGather_STARTINGsupervisorUnitPIDs", "TestGather_FATALsupervisorUnitPIDs"},
 	}
 	pidsTags := p.findPids()
 	for _, pidsTag := range pidsTags {
