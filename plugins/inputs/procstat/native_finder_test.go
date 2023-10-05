@@ -42,8 +42,8 @@ func TestChildPattern(t *testing.T) {
 		f, err := NewNativeFinder()
 		require.NoError(t, err)
 
-		childpids, err := f.ChildPattern("sleep")
-		fmt.Println("pid in childpids which pattern sleep...")
+		childpids, err := f.ChildPattern("gotestsum")
+		fmt.Println("pid in childpids which pattern gotestsum...")
 		for _, p := range childpids {
 			t.Log(string(p))
 			fmt.Println(string(p))
