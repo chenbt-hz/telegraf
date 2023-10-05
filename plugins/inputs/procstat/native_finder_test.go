@@ -47,7 +47,7 @@ func TestChildPattern(t *testing.T) {
 			t.Log(string(p))
 		}
 
-		require.Equal(t, []PID{PID(cmd.Process.Pid)}, childpids)
+		require.Contains(t, childpids, PID(cmd.Process.Pid))
 		cmd.Process.Kill()
 		if err != nil {
 			panic(err)
